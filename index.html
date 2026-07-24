@@ -700,26 +700,17 @@ function weekText(){
 function exportWeek(){
   const recs=weekText();
   if(!recs.length){alert('本机还没有观察记录');return;}
-  const body=recs.map(x=>'【'+x.date+'】预测：'+(x.pred||'-')+'
-观察：'+(x.obs||'(无)')).join('
-
-');
+  const body=recs.map(x=>'【'+x.date+'】预测：'+(x.pred||'-')+'\n观察：'+(x.obs||'(无)')).join('\n\n');
   const title='观察周报 '+recs[0].date+'~'+recs[recs.length-1].date;
   const url='https://github.com/'+REPO+'/issues/new?title='+encodeURIComponent(title)+'&body='+encodeURIComponent(body);
   window.open(url,'_blank');
-  if(navigator.clipboard)navigator.clipboard.writeText(title+'
-
-'+body);
-  alert('已打开 GitHub 新 Issue（预填好本周观察），手机上点 Submit 即归档。
-（同时复制了一份到剪贴板做备份）');
+  if(navigator.clipboard)navigator.clipboard.writeText(title+'\n\n'+body);
+  alert('已打开 GitHub 新 Issue（预填好本周观察），手机上点 Submit 即归档。\n（同时复制了一份到剪贴板做备份）');
 }
 function copyWeek(){
   const recs=weekText();
   if(!recs.length){alert('本机还没有观察记录');return;}
-  const txt=recs.map(x=>'【'+x.date+'】预测：'+(x.pred||'-')+'
-观察：'+(x.obs||'(无)')).join('
-
-');
+  const txt=recs.map(x=>'【'+x.date+'】预测：'+(x.pred||'-')+'\n观察：'+(x.obs||'(无)')).join('\n\n');
   if(navigator.clipboard)navigator.clipboard.writeText(txt);
   alert('已复制到剪贴板，可贴给我');
 }
