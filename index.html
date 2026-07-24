@@ -5,149 +5,173 @@
 <style>
  *{box-sizing:border-box;margin:0;padding:0}
  body{font-family:-apple-system,"PingFang SC",system-ui,sans-serif;background:#0e1118;color:#d1d4dc;
-   font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased;padding:10px;max-width:680px;margin:0 auto}
+   font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased;padding:12px;max-width:1400px;margin:0 auto}
  a{color:#2962ff;text-decoration:none}
  .hd{display:flex;justify-content:space-between;align-items:center;padding:4px 2px 8px;border-bottom:1px solid #1c2230}
- .hd .t{font-size:12px;color:#787b86}.hd .pr{font-size:11px;color:#787b86}
- .sec{margin-top:14px}.sec h2{font-size:12px;color:#787b86;font-weight:500;padding:0 2px 6px;border-bottom:1px solid #1c2230;margin-bottom:8px;letter-spacing:.5px}
+ .hd .t{font-size:13px;color:#d1d4dc;font-weight:600}.hd .pr{font-size:11.5px;color:#787b86}
+ .sec{margin-top:16px}.sec h2{font-size:15px;color:#d1d4dc;font-weight:600;padding:0 2px 8px;border-bottom:1px solid #1c2230;margin-bottom:10px;letter-spacing:.5px}
+ .sec h2 span{font-size:11px;color:#5b6071;font-weight:400}
  /* State Map */
- .smap{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#1c2230;border:1px solid #1c2230;border-radius:6px;overflow:hidden}
- .smap .grp{background:#131722;padding:8px 9px}.smap .gh{font-size:10px;color:#787b86;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
- .smap .row{display:flex;justify-content:space-between;align-items:center;padding:2px 0;font-size:12px}
- .smap .nm{color:#9aa0ac}.smap .v{display:flex;align-items:center;gap:4px}
- .smap .ar{font-weight:700;font-size:13px}.up{color:#26a69a}.dn{color:#ef5350}.flat{color:#787b86}
- .smap .pct{font-size:11px;color:#787b86}
- /* modules */
- .mod{margin-bottom:10px;border:1px solid #1c2230;border-radius:6px;overflow:hidden}
- .mod>.mh{background:#131722;font-size:11px;color:#787b86;padding:6px 10px;border-bottom:1px solid #1c2230;letter-spacing:.4px}
- .ind{padding:8px 10px;border-bottom:1px solid #161a23}.ind:last-child{border-bottom:0}
+ .smap{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#1c2230;border:1px solid #1c2230;border-radius:8px;overflow:hidden}
+ .smap .grp{background:#131722;padding:10px 11px}.smap .gh{font-size:11px;color:#787b86;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+ .smap .row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:13px}
+ .smap .nm{color:#9aa0ac}.smap .v{display:flex;align-items:center;gap:5px}
+ .smap .ar{font-weight:700;font-size:14px}.smap .pct{font-size:11.5px;color:#787b86;font-variant-numeric:tabular-nums}
+ /* 涨跌方向 + 3档强度（同元素叠加，强度类在后覆盖） */
+ .up{color:#26a69a}.dn{color:#ef5350}.flat{color:#787b86}
+ .upl{color:#4a7a73}.upm{color:#26a69a}.ups{color:#00e676}
+ .dnl{color:#8a5a5a}.dnm{color:#ef5350}.dns{color:#ff5252}
+ /* modules grid */
+ .modules{display:grid;grid-template-columns:1fr;gap:12px;margin-top:4px;align-items:start}
+ .mod{border:1px solid #1c2230;border-radius:8px;overflow:hidden;background:#131722}
+ .mod>.mh{background:#131722;font-size:12px;color:#787b86;padding:8px 12px;border-bottom:1px solid #1c2230;letter-spacing:.5px;text-transform:uppercase}
+ /* indicator card */
+ .ind{padding:12px 14px;border-bottom:1px solid #161a23;min-height:150px}.ind:last-child{border-bottom:0}
  .ind .top{display:flex;justify-content:space-between;align-items:baseline}
- .ind .nm{font-size:13px;color:#d1d4dc;font-weight:500}.ind .un{font-size:10px;color:#5b6071;margin-left:4px}
- .ind .val{font-size:17px;font-weight:600;color:#e8eaed}.ind .asof{font-size:10px;color:#5b6071;font-weight:400;margin-left:3px}
- .ind .yd{font-size:11px;color:#787b86;margin-top:1px}.ind .yd b{font-weight:600}
- .pbar-wrap{margin-top:6px}.pbar-wrap .pl{font-size:10px;color:#787b86;display:flex;justify-content:space-between;margin-bottom:2px}
- .pbar{position:relative;height:7px;background:#1c2230;border-radius:4px}.pfill{height:100%;border-radius:4px}
- .pdot{position:absolute;top:-2px;width:11px;height:11px;border-radius:50%;background:#fff;border:2px solid #0e1118;transform:translateX(-50%)}
- .chart{width:100%;height:110px;margin-top:6px}
- .rng{font-size:10px;color:#5b6071;margin-top:2px;display:flex;justify-content:space-between}
- details{margin-top:5px}.smry{font-size:11px;color:#2962ff;cursor:pointer;list-style:none}.smry::before{content:"ℹ "}
- .exp{font-size:11px;color:#9aa0ac;padding-top:4px;line-height:1.5}.exp b{color:#c7ccd6;font-weight:500}
- /* relationship */
- .rel{padding:8px 10px;border-bottom:1px solid #161a23}.rel:last-child{border:0}
- .rel .rt{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
- .rel .pn{font-size:12px;color:#d1d4dc}.rel .cv{text-align:right}
- .rel .cv .c60{font-size:15px;font-weight:600}.rel .cv .c252{font-size:10px;color:#787b86}
- .rel .delta{font-size:11px;margin-bottom:4px}.cchart{width:100%;height:85px}
+ .ind .nm{font-size:14px;color:#d1d4dc;font-weight:600}.ind .un{font-size:11px;color:#5b6071;margin-left:5px;font-weight:400}
+ .ind .val{font-size:26px;font-weight:700;color:#e8eaed;line-height:1.15;font-variant-numeric:tabular-nums}.ind .asof{font-size:11.5px;color:#5b6071;font-weight:400;margin-left:4px}
+ .ind .yd{font-size:11.5px;color:#787b86;margin-top:3px;font-variant-numeric:tabular-nums}.ind .yd b{font-weight:600;color:#9aa0ac}
+ /* percentile bar w/ ticks + axis */
+ .pbar-wrap{margin-top:8px}.pbar-wrap .pl{font-size:11.5px;color:#787b86;display:flex;justify-content:space-between;margin-bottom:3px}
+ .pbar{position:relative;height:8px;background:#1c2230;border-radius:4px}
+ .pfill{height:100%;border-radius:4px;position:relative;z-index:0}
+ .pdot{position:absolute;top:-2px;width:11px;height:11px;border-radius:50%;background:#fff;border:2px solid #0e1118;transform:translateX(-50%);z-index:2}
+ .ptick{position:absolute;top:-3px;bottom:-3px;width:1px;background:#4a5061;z-index:1}
+ .paxis{display:flex;justify-content:space-between;font-size:11.5px;color:#5b6071;margin-top:4px;font-variant-numeric:tabular-nums}
+ .chart{width:100%;height:130px;margin-top:8px}
+ .rng{font-size:11.5px;color:#5b6071;margin-top:4px;display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
+ details{margin-top:6px}.smry{font-size:11.5px;color:#2962ff;cursor:pointer;list-style:none}.smry::before{content:"ℹ "}
+ .exp{font-size:11.5px;color:#9aa0ac;padding-top:4px;line-height:1.55}.exp b{color:#c7ccd6;font-weight:500}
+ /* relationship grid */
+ .relgrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:4px}
+ .rel{padding:10px 12px;border:1px solid #1c2230;border-radius:8px;background:#131722}
+ .rel .rt{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+ .rel .pn{font-size:13px;color:#d1d4dc;font-weight:500}.rel .cv{text-align:right;font-variant-numeric:tabular-nums}
+ .rel .cv .c60{font-size:17px;font-weight:700}.rel .cv .c252{font-size:11px;color:#787b86}
+ .rel .delta{font-size:11.5px;margin-bottom:5px}.cchart{width:100%;height:100px}
  .corrneg{color:#ef5350}.corrpos{color:#26a69a}
- /* prediction */
- .pred{border:1px dashed #1c2230;border-radius:6px;padding:10px;margin-top:6px}
- .pred p{font-size:12px;color:#9aa0ac;margin-bottom:7px}
- .pred select{width:100%;padding:8px;background:#131722;border:1px solid #1c2230;color:#d1d4dc;border-radius:4px;font-size:13px}
- .pred button{margin-top:7px;width:100%;padding:9px;background:#2962ff;color:#fff;border:0;border-radius:4px;font-size:13px}
- .pred .hist{font-size:10px;color:#5b6071;margin-top:7px;line-height:1.5}
- .pred .lbl{display:block;font-size:11px;color:#787b86;margin:7px 0 3px}
- .pred textarea{width:100%;padding:8px;background:#131722;border:1px solid #1c2230;color:#d1d4dc;border-radius:4px;font-size:12px;resize:vertical;font-family:inherit}
- .pred .exprow{display:flex;gap:6px;margin-top:7px}
- .pred .ex{flex:2;padding:8px;background:#1c2230;color:#d1d4dc;border:1px solid #2a2e39;border-radius:4px;font-size:11px}
- .pred .cp{flex:1;padding:8px;background:#131722;color:#787b86;border:1px solid #1c2230;border-radius:4px;font-size:11px}
+ /* gate (顶部盲猜，极简) */
+ .gate{border:1px dashed #2a2e39;border-radius:8px;padding:12px;margin-top:8px;background:#0e1118}
+ .gate p{font-size:12px;color:#9aa0ac;margin-bottom:8px;line-height:1.5}
+ .gate .lbl{display:block;font-size:11.5px;color:#787b86;margin:8px 0 3px}
+ .gate select{width:100%;padding:9px;background:#131722;border:1px solid #1c2230;color:#d1d4dc;border-radius:5px;font-size:13px}
+ .gate button{margin-top:8px;width:100%;padding:10px;background:#2962ff;color:#fff;border:0;border-radius:5px;font-size:13px;font-weight:600;cursor:pointer}
+ /* rec (末尾记录) */
+ .rec{border:1px solid #1c2230;border-radius:8px;padding:12px;margin-top:10px;background:#131722}
+ .rec .lbl{display:block;font-size:11.5px;color:#787b86;margin:8px 0 3px}
+ .rec textarea{width:100%;padding:9px;background:#0e1118;border:1px solid #1c2230;color:#d1d4dc;border-radius:5px;font-size:12px;resize:vertical;font-family:inherit;line-height:1.5}
+ .rec .exprow{display:flex;gap:6px;margin-top:8px}
+ .rec .ex{flex:1;padding:9px;background:#1c2230;color:#d1d4dc;border:1px solid #2a2e39;border-radius:5px;font-size:11.5px;cursor:pointer}
+ .rec .cp{flex:1;padding:9px;background:#1c2230;color:#787b86;border:1px solid #2a2e39;border-radius:5px;font-size:11.5px;cursor:pointer}
+ .rec .hist{font-size:11px;color:#5b6071;margin-top:8px;line-height:1.55}
  #cards{display:none}
- .foot{text-align:center;font-size:10px;color:#5b6071;margin-top:16px;padding-top:10px;border-top:1px solid #1c2230;line-height:1.7}
+ .foot{text-align:center;font-size:11px;color:#5b6071;margin-top:20px;padding-top:12px;border-top:1px solid #1c2230;line-height:1.7}
+ /* 平板/横屏 ≥600 */
+ @media(min-width:600px){
+   body{padding:16px}
+   .modules{grid-template-columns:repeat(2,1fr);gap:14px}
+   .chart{height:160px}.cchart{height:120px}
+   .ind{padding:14px 16px}.ind .val{font-size:28px}
+ }
+ /* 桌面 ≥1024 */
+ @media(min-width:1024px){
+   body{padding:20px}
+   .smap{grid-template-columns:repeat(5,1fr)}
+   .modules{grid-template-columns:repeat(3,1fr);gap:16px}
+   .relgrid{grid-template-columns:repeat(2,1fr);gap:12px}
+   .chart{height:200px}.cchart{height:140px}
+   .ind{min-height:160px;padding:14px 18px}.ind .val{font-size:30px}
+   .sec h2{font-size:16px}.smap .ar{font-size:15px}.smap .grp{padding:12px 13px}
+   .rel .cv .c60{font-size:18px}.rel{padding:12px 14px}
+ }
 </style></head><body>
 <div class="hd"><div class="t">📊 Market Memory Terminal</div><a href="https://github.com/dingchuanqinyue-glitch/Market_Memory-_uilde/issues/new">💬 反馈</a></div>
 <div class="hd" style="border:0;padding:0 2px 8px"><div class="pr">采集 2026-07-24 · 先积累1000个事实，再解释第1001个 · 仅事实不结论</div></div>
 
 <div class="sec">
-  <h2>MARKET STATE · 今日全局 <span style="font-size:9px;color:#5b6071;font-weight:400">（各资产按各自最新交易日；跨市场日期可能差1天，见每卡@日期）</span></h2>
+  <h2>MARKET STATE · 今日全局 <span>（各资产按各自最新交易日；跨市场日期可能差1天，见每卡@日期）</span></h2>
   <div class="smap">
   
     <div class="grp"><div class="gh">股票</div>
     
       
-      <div class="row"><span class="nm">标普500</span><span class="v"><span class="ar dn">↓↓</span>
-      <span class="pct">-1.21%</span></span></div>
+      <div class="row"><span class="nm">标普500</span><span class="v"><span class="ar dnm">↓↓</span>
+      <span class="pct dnm">-1.21%</span></span></div>
     
       
-      <div class="row"><span class="nm">纳指</span><span class="v"><span class="ar dn">↓↓</span>
-      <span class="pct">-2.15%</span></span></div>
+      <div class="row"><span class="nm">纳指</span><span class="v"><span class="ar dnm">↓↓</span>
+      <span class="pct dnm">-2.15%</span></span></div>
     
       
-      <div class="row"><span class="nm">沪深300</span><span class="v"><span class="ar up">↑</span>
-      <span class="pct">+0.23%</span></span></div>
+      <div class="row"><span class="nm">沪深300</span><span class="v"><span class="ar upl">↑</span>
+      <span class="pct upl">+0.23%</span></span></div>
     
       
-      <div class="row"><span class="nm">中证1000</span><span class="v"><span class="ar up">↑</span>
-      <span class="pct">+0.51%</span></span></div>
+      <div class="row"><span class="nm">中证1000</span><span class="v"><span class="ar upl">↑</span>
+      <span class="pct upl">+0.51%</span></span></div>
     
     </div>
   
     <div class="grp"><div class="gh">利率</div>
     
       
-      <div class="row"><span class="nm">美债10Y</span><span class="v"><span class="ar up">↑</span>
-      <span class="pct">+0.86%</span></span></div>
+      <div class="row"><span class="nm">美债10Y</span><span class="v"><span class="ar upl">↑</span>
+      <span class="pct upl">+0.86%</span></span></div>
     
       
-      <div class="row"><span class="nm">美债2Y</span><span class="v"><span class="ar up">↑↑</span>
-      <span class="pct">+1.17%</span></span></div>
+      <div class="row"><span class="nm">美债2Y</span><span class="v"><span class="ar upm">↑↑</span>
+      <span class="pct upm">+1.17%</span></span></div>
     
     </div>
   
     <div class="grp"><div class="gh">汇率</div>
     
       
-      <div class="row"><span class="nm">USD/CNY</span><span class="v"><span class="ar flat">→</span>
-      <span class="pct">+0.05%</span></span></div>
+      <div class="row"><span class="nm">USD/CNY</span><span class="v"><span class="ar upl">→</span>
+      <span class="pct upl">+0.05%</span></span></div>
     
     </div>
   
     <div class="grp"><div class="gh">商品</div>
     
       
-      <div class="row"><span class="nm">黄金</span><span class="v"><span class="ar flat">→</span>
-      <span class="pct">+0.00%</span></span></div>
+      <div class="row"><span class="nm">黄金</span><span class="v"><span class="ar upl">→</span>
+      <span class="pct upl">+0.00%</span></span></div>
     
       
-      <div class="row"><span class="nm">原油</span><span class="v"><span class="ar up">↑↑</span>
-      <span class="pct">+1.14%</span></span></div>
+      <div class="row"><span class="nm">原油</span><span class="v"><span class="ar upm">↑↑</span>
+      <span class="pct upm">+1.14%</span></span></div>
     
     </div>
   
     <div class="grp"><div class="gh">波动</div>
     
       
-      <div class="row"><span class="nm">美国VIX</span><span class="v"><span class="ar dn">↓↓</span>
-      <span class="pct">-2.40%</span></span></div>
+      <div class="row"><span class="nm">美国VIX</span><span class="v"><span class="ar dnm">↓↓</span>
+      <span class="pct dnm">-2.40%</span></span></div>
     
       
-      <div class="row"><span class="nm">中国QVIX</span><span class="v"><span class="ar dn">↓↓</span>
-      <span class="pct">-4.92%</span></span></div>
+      <div class="row"><span class="nm">中国QVIX</span><span class="v"><span class="ar dns">↓↓</span>
+      <span class="pct dns">-4.92%</span></span></div>
     
     </div>
   
   </div>
 </div>
 
-<div class="pred">
-  <p>🧠 <b>今日记录</b>（active recall）：①先猜"今天哪个指标处于历史极端（分位最高/最低）"——分位藏在下面、全局图看不到，得真盲猜；②写下今天的观察/想法。记完点"记录并揭晓"。</p>
-  <label class="lbl">预测（哪个指标分位最极端）</label>
+<div class="gate">
+  <p>🧠 <b>先盲猜</b>：今天哪个指标历史分位最极端（最高/最低）？分位藏在下面、全局图看不到，得真盲猜。选一个 → 揭晓数据。</p>
   <select id="predpick">
     <option value="沪深300">沪深300</option><option value="中证1000">中证1000</option><option value="上涨家数">上涨家数</option><option value="下跌家数">下跌家数</option><option value="全A成交额亿">全A成交额亿</option><option value="USD/CNY">USD/CNY</option><option value="中国QVIX">中国QVIX</option><option value="标普500">标普500</option><option value="纳指">纳指</option><option value="黄金">黄金</option><option value="原油">原油</option><option value="美债10Y">美债10Y</option><option value="美债2Y">美债2Y</option><option value="美国VIX">美国VIX</option><option value="信用利差">信用利差</option><option value="10Y-2Y利差">10Y-2Y利差</option>
   </select>
-  <label class="lbl">今日<b>事实</b>（只记看到的：数值 / 现象 / 变化，不推断）</label>
-  <textarea id="predfacts" rows="2" placeholder="例：美债2Y 4.9%处5年高位；10Y-2Y利差转正；VIX低位"></textarea>
-  <label class="lbl">我的<b>想法</b>（推断 / 预测 / 疑问随便写，和事实分开）</label>
-  <textarea id="predthoughts" rows="2" placeholder="例：感觉美债该回调；VIX这么低是不是该警惕"></textarea>
-  <button class="rv" onclick="reveal()">记录并揭晓</button>
-  <div class="exprow">
-    <button class="ex" onclick="exportWeek()">📤 导出本周观察→GitHub</button>
-    <button class="cp" onclick="copyWeek()">📋 复制</button>
-  </div>
-  <div class="hist" id="predhist"></div>
+  <button class="rv" onclick="reveal()">记录猜测并揭晓数据</button>
 </div>
 
 <div id="cards">
+<div class="sec"><h2>指标明细</h2>
+<div class="modules">
 
-  <div class="sec"><h2>全球权益</h2>
+  <div class="mod"><div class="mh">全球权益</div>
     
     <div class="ind">
       <div class="top">
@@ -156,14 +180,16 @@
       </div>
       
       <div class="yd">昨 <b>7,498.96</b> → 今 <b>7,408.30</b>
-        <span class="dn">-1.21%</span></div>
+        <span class="dnm">-1.21%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本1254））</span><span>97.0%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:97.0%;background:#ef5350"></div>
           <div class="pdot" style="left:97.0%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>6,238.01</span><span>7,609.78</span></div></div>
       
       
       <div class="chart" id="chart-4"></div>
@@ -183,14 +209,16 @@
       </div>
       
       <div class="yd">昨 <b>25,690.90</b> → 今 <b>25,137.69</b>
-        <span class="dn">-2.15%</span></div>
+        <span class="dnm">-2.15%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本1254））</span><span>95.7%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:95.7%;background:#ef5350"></div>
           <div class="pdot" style="left:95.7%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>20,650.13</span><span>27,093.90</span></div></div>
       
       
       <div class="chart" id="chart-5"></div>
@@ -205,7 +233,7 @@
     
   </div>
 
-  <div class="sec"><h2>中国市场</h2>
+  <div class="mod"><div class="mh">中国市场</div>
     
     <div class="ind">
       <div class="top">
@@ -214,14 +242,16 @@
       </div>
       
       <div class="yd">昨 <b>4,717.24</b> → 今 <b>4,728.00</b>
-        <span class="up">+0.23%</span></div>
+        <span class="upl">+0.23%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本1210））</span><span>83.9%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:83.9%;background:#ef5350"></div>
           <div class="pdot" style="left:83.9%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>4,007.20</span><span>5,059.66</span></div></div>
       
       
       <div class="chart" id="chart-0"></div>
@@ -241,14 +271,16 @@
       </div>
       
       <div class="yd">昨 <b>7,158.76</b> → 今 <b>7,195.50</b>
-        <span class="up">+0.51%</span></div>
+        <span class="upl">+0.51%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本1210））</span><span>70.2%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:70.2%;background:#363a45"></div>
           <div class="pdot" style="left:70.2%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>6,406.57</span><span>8,955.45</span></div></div>
       
       
       <div class="chart" id="chart-1"></div>
@@ -317,7 +349,7 @@
     
   </div>
 
-  <div class="sec"><h2>利率·汇率</h2>
+  <div class="mod"><div class="mh">利率·汇率</div>
     
     <div class="ind">
       <div class="top">
@@ -326,14 +358,16 @@
       </div>
       
       <div class="yd">昨 <b>6.79</b> → 今 <b>6.79</b>
-        <span class="up">+0.05%</span></div>
+        <span class="upl">+0.05%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近3年分位（样本728））</span><span>1.0%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:1.0%;background:#26a69a"></div>
           <div class="pdot" style="left:1.0%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>6.79</span><span>7.15</span></div></div>
       
       
       <div class="chart" id="chart-2"></div>
@@ -353,14 +387,16 @@
       </div>
       
       <div class="yd">昨 <b>4.63</b> → 今 <b>4.67</b>
-        <span class="up">+0.86%</span></div>
+        <span class="upl">+0.86%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本1247））</span><span>98.0%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:98.0%;background:#ef5350"></div>
           <div class="pdot" style="left:98.0%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>3.97</span><span>4.67</span></div></div>
       
       
       <div class="chart" id="chart-8"></div>
@@ -380,14 +416,16 @@
       </div>
       
       <div class="yd">昨 <b>4.26</b> → 今 <b>4.31</b>
-        <span class="up">+1.17%</span></div>
+        <span class="upm">+1.17%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本1247））</span><span>71.3%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:71.3%;background:#363a45"></div>
           <div class="pdot" style="left:71.3%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>3.38</span><span>4.31</span></div></div>
       
       
       <div class="chart" id="chart-9"></div>
@@ -407,14 +445,16 @@
       </div>
       
       <div class="yd">昨 <b>0.37</b> → 今 <b>0.36</b>
-        <span class="dn">-2.70%</span></div>
+        <span class="dnm">-2.70%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本1247））</span><span>62.2%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:62.2%;background:#363a45"></div>
           <div class="pdot" style="left:62.2%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>0.27</span><span>0.74</span></div></div>
       
       
       <div class="chart" id="chart-12"></div>
@@ -429,7 +469,7 @@
     
   </div>
 
-  <div class="sec"><h2>商品</h2>
+  <div class="mod"><div class="mh">商品</div>
     
     <div class="ind">
       <div class="top">
@@ -438,14 +478,16 @@
       </div>
       
       <div class="yd">昨 <b>901.74</b> → 今 <b>901.76</b>
-        <span class="up">+0.00%</span></div>
+        <span class="upl">+0.00%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本1210））</span><span>85.9%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:85.9%;background:#ef5350"></div>
           <div class="pdot" style="left:85.9%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>770.28</span><span>1,249.12</span></div></div>
       
       
       <div class="chart" id="chart-6"></div>
@@ -465,14 +507,16 @@
       </div>
       
       <div class="yd">昨 <b>83.43</b> → 今 <b>84.38</b>
-        <span class="up">+1.14%</span></div>
+        <span class="upm">+1.14%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本1244））</span><span>74.0%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:74.0%;background:#363a45"></div>
           <div class="pdot" style="left:74.0%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>55.44</span><span>114.58</span></div></div>
       
       
       <div class="chart" id="chart-7"></div>
@@ -487,7 +531,7 @@
     
   </div>
 
-  <div class="sec"><h2>波动·信用</h2>
+  <div class="mod"><div class="mh">波动·信用</div>
     
     <div class="ind">
       <div class="top">
@@ -496,14 +540,16 @@
       </div>
       
       <div class="yd">昨 <b>19.09</b> → 今 <b>18.15</b>
-        <span class="dn">-4.92%</span></div>
+        <span class="dns">-4.92%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近3年分位（样本718））</span><span>66.3%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:66.3%;background:#363a45"></div>
           <div class="pdot" style="left:66.3%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>13.30</span><span>42.16</span></div></div>
       
       
       <div class="chart" id="chart-3"></div>
@@ -523,14 +569,16 @@
       </div>
       
       <div class="yd">昨 <b>17.05</b> → 今 <b>16.64</b>
-        <span class="dn">-2.40%</span></div>
+        <span class="dnm">-2.40%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本1285））</span><span>37.6%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:37.6%;background:#363a45"></div>
           <div class="pdot" style="left:37.6%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>13.47</span><span>31.05</span></div></div>
       
       
       <div class="chart" id="chart-10"></div>
@@ -550,14 +598,16 @@
       </div>
       
       <div class="yd">昨 <b>1.58</b> → 今 <b>1.57</b>
-        <span class="dn">-0.63%</span></div>
+        <span class="dnl">-0.63%</span></div>
       
       
       <div class="pbar-wrap"><div class="pl"><span>历史位置（近5年分位（样本787））</span><span>1.0%</span></div>
         <div class="pbar">
+          <span class="ptick" style="left:5%"></span><span class="ptick" style="left:50%"></span><span class="ptick" style="left:95%"></span>
           <div class="pfill" style="width:1.0%;background:#26a69a"></div>
           <div class="pdot" style="left:1.0%"></div>
-        </div></div>
+        </div>
+        <div class="paxis"><span>1.56</span><span>2.22</span></div></div>
       
       
       <div class="chart" id="chart-11"></div>
@@ -572,9 +622,11 @@
     
   </div>
 
+</div>
+</div>
 
-<div class="sec"><h2>RELATIONSHIP · 相关性变化</h2>
-  <div class="mod">
+<div class="sec"><h2>RELATIONSHIP · 相关性变化 <span>（日变化 Pearson：60天 vs 1年）</span></h2>
+  <div class="relgrid">
   
     <div class="rel">
       <div class="rt"><span class="pn">标普500 vs 美债10Y</span>
@@ -644,10 +696,27 @@
   
   </div>
 </div>
+
+<div class="sec"><h2>记录观察 <span>（看完上面的数据再写：事实栏只记看到的，想法栏随便推断）</span></h2>
+<div class="rec">
+  <label class="lbl">今日<b>事实</b>（数值 / 现象 / 变化，不推断）</label>
+  <textarea id="predfacts" rows="2" placeholder="例：美债2Y 4.9%处5年高位；10Y-2Y利差转正；VIX低位"></textarea>
+  <label class="lbl">我的<b>想法</b>（推断 / 预测 / 疑问，和事实分开）</label>
+  <textarea id="predthoughts" rows="2" placeholder="例：感觉美债该回调；VIX这么低是不是该警惕"></textarea>
+  <div class="exprow">
+    <button class="ex" onclick="saveObs()">💾 保存今日观察</button>
+    <button class="cp" onclick="copyWeek()">📋 复制本周</button>
+  </div>
+  <div class="exprow">
+    <button class="ex" onclick="exportWeek()">📤 导出本周观察 → GitHub</button>
+  </div>
+  <div class="hist" id="predhist"></div>
+</div>
+</div>
 </div><!-- /cards -->
 
 <div class="foot">
-  <a href="https://github.com/dingchuanqinyue-glitch/Market_Memory-_uilde/issues/new">💬 反馈/建议</a> · 分位=近3–5年排序 · 相关=日变化Pearson(252/60天) · 变化=(今/前N日−1)×100 · 箭头↑↑/↓↓=|日变|≥1%<br>
+  <a href="https://github.com/dingchuanqinyue-glitch/Market_Memory-_uilde/issues/new">💬 反馈/建议</a> · 分位=近3–5年排序 · 相关=日变化Pearson(252/60天) · 变化=(今/前N日−1)×100 · 色深=|日变|强度(淡<1%/中1-3%/强>3%)<br>
   缺口：H股/北向/DXY(网络受限)/MOVE · 图表 TradingView Lightweight Charts
 </div>
 
@@ -665,7 +734,7 @@ const CORR_DATA = [{"hist": [{"time": "2025-07-18", "value": -0.058}, {"time": "
 const CHARTS = [];
 function mkChart(id, series, opts){
   const el=document.getElementById(id); if(!el||!series||series.length<2)return;
-  const c=LightweightCharts.createChart(el,{width:el.clientWidth,height:opts.h||110,layout:{background:{color:'transparent'},textColor:'#787b86',fontSize:9},
+  const c=LightweightCharts.createChart(el,{width:el.clientWidth,height:el.clientHeight||130,layout:{background:{color:'transparent'},textColor:'#787b86',fontSize:9},
     grid:{vertLines:{color:'transparent'},horzLines:{color:'#1c2230'}},rightPriceScale:{borderVisible:false},
     timeScale:{borderVisible:false,visible:opts.axis!==false},crosshair:{mode:0},handleScale:false,handleScroll:false});
   const s=c.addLineSeries({color:opts.color||'#2962ff',lineWidth:2,priceLineVisible:false,lastValueVisible:false});
@@ -676,27 +745,41 @@ function mkChart(id, series, opts){
   CHARTS.push({c:c, el:el});
 }
 function renderAll(){
-  CHART_DATA.forEach((d,i)=>mkChart('chart-'+i,d.series,{hi:d.hi,lo:d.lo,color:'#2962ff',axis:false,h:120}));
-  CORR_DATA.forEach((d,i)=>{ if(d.hist&&d.hist.length)mkChart('corr-'+i,d.hist,{color:'#b39ddb',axis:false,h:85}); });
+  CHART_DATA.forEach((d,i)=>mkChart('chart-'+i,d.series,{hi:d.hi,lo:d.lo,color:'#2962ff',axis:false}));
+  CORR_DATA.forEach((d,i)=>{ if(d.hist&&d.hist.length)mkChart('corr-'+i,d.hist,{color:'#b39ddb',axis:false}); });
 }
 const REPO='dingchuanqinyue-glitch/Market_Memory-_uilde';
 function reveal(){
   const pick=document.getElementById('predpick').value;
+  const today='2026-07-24';
+  let arr=JSON.parse(localStorage.getItem('mmb_records')||'[]');
+  let rec=arr.find(x=>x.date===today);
+  if(rec){rec.pred=pick;} else {rec={date:today,pred:pick,facts:'',thoughts:''}; arr.push(rec);}
+  if(arr.length>400)arr=arr.slice(-400);
+  localStorage.setItem('mmb_records',JSON.stringify(arr));
+  document.getElementById('cards').style.display='block';
+  const rb=document.querySelector('button.rv'); if(rb)rb.style.display='none';
+  renderAll();
+  document.getElementById('predfacts').value=rec.facts||'';
+  document.getElementById('predthoughts').value=rec.thoughts||'';
+  showHist();
+}
+function saveObs(){
   const facts=document.getElementById('predfacts').value.trim();
   const thoughts=document.getElementById('predthoughts').value.trim();
   const today='2026-07-24';
   let arr=JSON.parse(localStorage.getItem('mmb_records')||'[]');
   let rec=arr.find(x=>x.date===today);
-  if(rec){rec.pred=pick;rec.facts=facts;rec.thoughts=thoughts;} else {arr.push({date:today,pred:pick,facts:facts,thoughts:thoughts});}
+  if(rec){rec.facts=facts;rec.thoughts=thoughts;} else {rec={date:today,pred:'',facts:facts,thoughts:thoughts}; arr.push(rec);}
   if(arr.length>400)arr=arr.slice(-400);
   localStorage.setItem('mmb_records',JSON.stringify(arr));
-  document.getElementById('cards').style.display='block';
-  const rb=document.querySelector('.pred button.rv'); if(rb)rb.style.display='none';
-  renderAll(); showHist();
+  showHist();
+  const btn=document.querySelector('[onclick*="saveObs"]');
+  if(btn){const orig=btn.textContent;btn.textContent='已保存✓';setTimeout(function(){btn.textContent=orig;},1500);}
 }
 function weekText(){
   let arr=JSON.parse(localStorage.getItem('mmb_records')||'[]');
-  const old=JSON.parse(localStorage.getItem('mmb_preds')||'[]');   // 兼容旧数据
+  const old=JSON.parse(localStorage.getItem('mmb_preds')||'[]');
   arr=arr.concat(old.filter(o=>!arr.find(a=>a.date===o.date))).sort((a,b)=>a.date<b.date?-1:1);
   return arr.slice(-20);
 }
@@ -723,7 +806,7 @@ function showHist(){
   const last=recs.slice(-12).reverse();
   document.getElementById('predhist').innerHTML='<b>本机记录（最近'+Math.min(12,recs.length)+'条）：</b><br>'+last.map(function(x){const f=(x.facts||x.obs||'');const snip=f.slice(0,22)+(f.length>22?'…':'');return x.date.slice(5)+' → '+x.pred+(snip?(' · '+snip):'');}).join('<br>');
 }
-window.addEventListener('resize',()=>{CHARTS.forEach(function(o){ if(o.el.clientWidth>0){o.c.applyOptions({width:o.el.clientWidth});} });});
+window.addEventListener('resize',()=>{CHARTS.forEach(function(o){ if(o.el.clientWidth>0){o.c.applyOptions({width:o.el.clientWidth,height:o.el.clientHeight});} });});
 showHist();
 </script>
 </body></html>
